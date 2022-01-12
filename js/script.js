@@ -86,7 +86,7 @@ const app = {
     const ul = app.createElement('ul', app.state.container, {className : 'list'});
     //2. <li> avec les noms des plantes
     //2.a ) préparer la fonction de création de <li>
-    function createplantsList({name, effect, speciality}) {
+    function createpPlantsList({name, effect, speciality}) {
       const li = app.createElement('li', ul, { 
         className : 'plant', 
         textContent : name
@@ -102,7 +102,7 @@ const app = {
     //2.d) éxécuter la fonction et lui donner les noms
     plantsResult.forEach(
       (plant) => {
-        createplantsList(plant);
+        createpPlantsList(plant);
       }
     );
     
