@@ -1,0 +1,159 @@
+const app = {
+  state : {
+    currenteffect : 'digestion',
+    effects : [`digestion` ,`sommeil`],
+    //liste des plantes
+    plants : [
+      {
+        name: 'Verveine citronnelle',
+        effect: 'digestion',
+      },
+      {
+        name: 'Verveine citronnelle',
+        effect: 'sommeil',
+      },
+      {
+        name: 'Mélisse',
+        effect: 'sommeil',
+      },
+      {
+        name: 'Passiflore',
+        effect: 'sommeil',
+      },
+    ],
+  },
+
+  init: function() {
+    //créer l'interface
+    app.createInterface();
+  },
+
+  //AJOUT DES ELEMENTS AU DOM
+  /**
+ * Fonction qui permet de créer toute l'interface
+ */
+  createInterface : function () {
+  //récupérer le container en le plaçant à la base de l'app pour qu'il reste accessible en dehors de la fonction
+  app.state.container = document.getElementById('app');
+  //créer les éléments
+  app.createForm();
+  app.createCounter();
+  app.createList();
+  },
+
+  //I) formulaire contenant un <select> pour choisir entre les différentes options
+  /**
+   * Fonction qui crée la structure du formulaire de type liste déroulante
+   * et l'ajoute au DOM
+   */
+  createForm: function() {
+    //1. le formulaire
+    const formElement = app.createElement('form', app.state.container, {id : 'form'});
+    //2. le <select>
+    const selectElement = app.createElement('select', formElement,{id : 'select'});
+    //3. ajouter les options au <select>
+    app.state.effects.forEach(
+      (effect) => {
+        //créer les options du <select>
+        const createOption = app.createElement('option', selectElement, {
+          value : effect , 
+          textContent : effect,
+          selected : effect === app.state.currenteffect
+        } );
+      }
+      );
+    //écouter le changement sur le select
+    selectElement.addEventListener('change', app.handleChange);
+  },
+  //II) compteur qui affiche le nombre de résultats
+  /**
+   * Fonction qui crée une DIV pour le compteur
+   * et l'ajoute au DOM
+   */
+  createCounter: function() {
+    app.createElement('div', app.state.container, { 
+      id : 'count'
+    });
+  },
+
+  //III) liste de plantes avec leur nom et un tag spécifiant leur effet principal
+  /**
+   * Fonction qui crée une liste non ordonnée représentant les résultats (plantes concernées et tags avec effet de la plante)
+   * et l'ajoute au DOM
+   */
+  createList : function() {
+    //1. ul
+    const ul = app.createElement('ul', app.state.container, {className : 'list'});
+    //2. <li> avec les noms des plantes
+    //2.a ) préparer la fonction de création de <li>
+    function createplantsList({name, effect, speciality}) {
+      const li = app.createElement('li', ul, { 
+        className : 'plant', 
+        textContent : name
+      });
+      //tags
+      app.createElement('span', li, {textContent : effect});
+    }
+    //2.b) filtrer les noms des plantes correspondant à la sélection
+    const filter = (plant) => (plant.effect === app.state.currenteffect);
+    const plantsResult = app.state.plants.filter(filter);
+    //2.c) donner le nb de résultats au compteur
+    document.getElementById('count').textContent = app.getCount(plantsResult.length);
+    //2.d) éxécuter la fonction et lui donner les noms
+    plantsResult.forEach(
+      (plant) => {
+        createplantsList(plant);
+      }
+    );
+    
+  },
+
+  //FONCTION UTILES
+
+  /**
+   * Permet de créer un élément tout en le configurant
+   * @param {String} tag élément à créer
+   * @param {Element} parent référence à l'élément du DOM auquel rattacher cet élément
+   * @param {Object} options objet qui va contenir l'ensemble des propriétés à appliquer
+   * @return Element
+   */
+  createElement : function(tag, parent, options = {}) {
+    //créer l'élément
+    const element = document.createElement(tag);
+    //configuration de l'élément
+    for (const key in options) {
+      element[key] = options[key];
+    }
+    //rattacher au parent
+    parent.appendChild(element);
+
+    //retourner l'élément créé
+    return element;
+  },
+
+  /**
+   * Permet de personnaliser la phrase affichée sur le compteur en fonction du nombre de résultats correspondant au <select>
+   * @param {Number} count nombre de résultats correspondant (index du <select>)
+   * @returns une phrase contenant le nombre de plantes correspondant au critère
+   */  
+  getCount : function (count) {
+    if (count === 0) return "Aucune plante trouvée";
+    if (count === 1) return "1 plante trouvée";
+    return `${count} plantes trouvées`;
+  },
+  /**
+   * Ecouteur d'évènement permettant de connaitre le filtre choisi par l'utilisateur
+   * @param {*} event choix effectué par l'utilisateur sur le formulaire select
+   */
+  handleChange : function (event) {
+    app.state.currenteffect = event.currentTarget.value;
+
+    //réinitialiser l'interface
+    app.state.container.textContent = "";
+    app.createInterface();
+  }
+  
+};
+
+// on initialise l'app dès que le document est prêt
+document.addEventListener('DOMContentLoaded', app.init);
