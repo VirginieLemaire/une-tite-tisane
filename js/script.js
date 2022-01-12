@@ -49,8 +49,8 @@ const app = {
   //Créer les 2 grosses parties de l'interface
   /* La partie de gauche avec la photo, la partie de droite étant la partie principale du l'interface*/
   createParts: function () {
-    const sideElement = app.createElement('div', app.state.container, {id: 'left-side'});
-    const mainElement = app.createElement('main', app.state.container, {id : 'main'});
+    const sideElement = app.createElement('div', app.state.container, {id: 'left-side', className: 'rounded'});
+    const mainElement = app.createElement('main', app.state.container, {id : 'main', className: 'rounded'});
     //stocker l'élément dans le state
     app.state.main = document.getElementById('main');
   },
@@ -80,7 +80,7 @@ const app = {
     //1. le formulaire
     const formElement = app.createElement('form', app.state.need, {id : 'form'});
     //2. le <select>
-    const selectElement = app.createElement('select', formElement,{id : 'select'});
+    const selectElement = app.createElement('select', formElement,{id : 'select', className: 'rounded'});
     //3. ajouter les options au <select>
     app.state.effects.forEach(
       (effect) => {
@@ -118,11 +118,11 @@ const app = {
     //2.a ) préparer la fonction de création de <li>
     function createpPlantsList({name, effect, speciality}) {
       const li = app.createElement('li', ul, { 
-        className : 'plant', 
+        className : 'plant rounded', 
         textContent : name
       });
       //tags
-      app.createElement('span', li, {textContent : effect});
+      app.createElement('span', li, {textContent : effect, className: 'rounded'});
     }
     //2.b) filtrer les noms des plantes correspondant à la sélection
     const filter = (plant) => (plant.effect === app.state.currenteffect);
