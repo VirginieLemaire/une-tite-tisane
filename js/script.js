@@ -23,6 +23,8 @@ const app = {
     ],
   },
 
+  
+
   init: function() {
     //créer l'interface
     app.createInterface();
@@ -35,12 +37,40 @@ const app = {
   createInterface : function () {
   //récupérer le container en le plaçant à la base de l'app pour qu'il reste accessible en dehors de la fonction
   app.state.container = document.getElementById('app');
+  
   //créer les éléments
+  app.createParts();
+  app.organiseMain();
   app.createForm();
   app.createCounter();
   app.createList();
   },
 
+  //Créer les 2 grosses parties de l'interface
+  /* La partie de gauche avec la photo, la partie de droite étant la partie principale du l'interface*/
+  createParts: function () {
+    const sideElement = app.createElement('div', app.state.container, {id: 'left-side'});
+    const mainElement = app.createElement('main', app.state.container, {id : 'main'});
+    //stocker l'élément dans le state
+    app.state.main = document.getElementById('main');
+  },
+
+  organiseMain: function () {
+    //3 parties : header, need, result
+    const header = app.createElement('header', app.state.main, {id : 'header'});
+    const h1 = app.createElement('h1', header);
+    const h2 = app.createElement('h2', header);
+    //ajouter le texte
+    h1.textContent = 'Une p\'tite tisane ?';
+    h2.textContent = 'Sélectionne un bienfait ci-dessous pour trouver une plante à utiliser';
+    
+    const need = app.createElement('div', app.state.main, {id: 'need'});
+    const result = app.createElement('div', app.state.main, {id: 'result'});
+    //stocker les éléments dans le state
+    app.state.need = document.getElementById('need');
+    app.state.result = document.getElementById('result');
+  },
+  
   //I) formulaire contenant un <select> pour choisir entre les différentes options
   /**
    * Fonction qui crée la structure du formulaire de type liste déroulante
@@ -48,7 +78,7 @@ const app = {
    */
   createForm: function() {
     //1. le formulaire
-    const formElement = app.createElement('form', app.state.container, {id : 'form'});
+    const formElement = app.createElement('form', app.state.need, {id : 'form'});
     //2. le <select>
     const selectElement = app.createElement('select', formElement,{id : 'select'});
     //3. ajouter les options au <select>
@@ -71,7 +101,7 @@ const app = {
    * et l'ajoute au DOM
    */
   createCounter: function() {
-    app.createElement('div', app.state.container, { 
+    app.createElement('div', app.state.result, { 
       id : 'count'
     });
   },
@@ -83,7 +113,7 @@ const app = {
    */
   createList : function() {
     //1. ul
-    const ul = app.createElement('ul', app.state.container, {className : 'list'});
+    const ul = app.createElement('ul', app.state.result, {className : 'list'});
     //2. <li> avec les noms des plantes
     //2.a ) préparer la fonction de création de <li>
     function createpPlantsList({name, effect, speciality}) {
