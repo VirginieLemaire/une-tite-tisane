@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  padding: 1rem;
+  display: flex;
+}
+
+.rounded {
+  border-radius: 0.5rem;
+}
+
+#app {
+  background: #d4d2d3;
+  width: 80%;
+  margin: auto;
+  height: 80%;
+  display: flex;
+}
+
+#left-side {
+  height: 100%;
+  width: 43%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-image: url("https://images.unsplash.com/photo-1593487806527-40dcc19864bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
+}
+#main {
+  height: 100%;
+  display: flex;
+  flex: content;
+  flex-direction: column;
+  align-content: center;
+}
+
+header {
+  margin: 0 auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-size: xx-large;
+  padding: 1rem;
+  font-family: 'Pacifico', cursive;
+}
+
+h2 {
+  font-size: large;
+  padding: 1rem;
+  font-weight: bold;
+  color: #5d5441;
+}
+
+#need, #result {
+  padding: 1rem;
+}
+
+select {
+  background: #eee;
+  width: 100%;
+  font-size: large;
+  font-family: 'Poppins', sans-serif;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: solid 1px #909d8b;
+  margin: 0.3rem;
+}
+
+
+
+#result {
+  #count {
+    border-bottom: .1rem solid;
+    border-color: #bbb;
+    width: 100%;
+    font-size: x-large;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+  .plant {
+    background: #909d8b;
+    border-color: #bbb;
+    width: 100%;
+    padding: 0.7rem;
+    margin: 0.6rem 0;
+    font-size: large;
+    color: white;
+    span {
+      background: #5e6048;
+      border-radius: 0.2rem;
+      padding: .2rem;
+      margin: .2rem;
+      font-size: small;
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 Une mini application pour trouver des plantes en fonction d'un de leurs bienfaits.
 
-Il s'agit ici uniquement d'un entrainement de préparation à React avec des ajouts DOM et une séparation des éléments.
+Il s'agit ici uniquement d'un entrainement de préparation à React avec des ajouts DOM et une séparation en éléments.
 
 ## Stack technique
 
@@ -11,4 +11,5 @@ Il s'agit ici uniquement d'un entrainement de préparation à React avec des ajo
 
 ## Utilisation
 
-Ouvrir le fichier index.html avec LiveServer
+Cloner le repo
+Ouvrir le fichier `./html/index.html`
