@@ -11,5 +11,6 @@ Il s'agit ici uniquement d'un entrainement de préparation à React avec des ajo
 
 ## Utilisation
 
-Cloner le repo
-Ouvrir le fichier `./html/index.html`
+Cloner le repo si vous le désirez.
+
+Ouvrir le fichier [./html/index.html](./html/index.html) dans le navigateur et choisir un bienfait pour trouver une ou des plantes à prendre en tisane.
